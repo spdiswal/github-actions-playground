@@ -1,0 +1,14 @@
+name: Verify pull requests
+on: [ pull_request ]
+jobs:
+  validate-commits:
+    name: Validate commits
+    runs-on: ubuntu-latest
+    steps:
+      - name: Check out the repository
+        uses: actions/checkout@v3
+      - name: Verify the commit messages
+        uses: rainstormy/github-action-validate-commit-messages@spdiswal/validate-commits
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          rules: require-non-fixup-commits, require-non-squash-commits, require-non-merge-commits
